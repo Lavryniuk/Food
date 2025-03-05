@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //timer
 
-    const deadline = '2025-03-03';
+    const deadline = '2025-03-06';
 
     function getTimeRemaining(endtime) {
         let days, hours, minutes, seconds;
@@ -100,7 +100,58 @@ window.addEventListener('DOMContentLoaded', () => {
                 clearInterval(timeInterval);
             }
         }
-    }
+    };
 
     setClock('.timer', deadline);
+
+    //modal
+
+    const modalTrigger = document.querySelectorAll('[data-modal'),
+          modal = document.querySelector('.modal'),
+          modalCloseBtn = document.querySelector('[data-close');
+    
+    function openModal() {
+        // modal.classList.add('show');
+        // modal.classList.remove('hide');
+        //but u must handly add class '.hide' to <div class="modal"> in HTML
+        //and remove CSS style 'display: none;' of '.modal'
+        //OR
+        modal.classList.toggle('show');
+        document.body.style.overflow = 'hidden';
+        clearInterval(modalTimerId);
+    };
+
+    modalTrigger.forEach(btn => {
+        btn.addEventListener('click', openModal);
+    });
+
+    function closeModal() {
+        modal.classList.toggle('show');
+        document.body.style.overflow = '';
+    };
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+
+    const modalTimerId = setTimeout(openModal, 3000);
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.         scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    };
+
+    window.addEventListener('scroll', showModalByScroll);
 });
