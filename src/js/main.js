@@ -294,6 +294,107 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     fetch('http://localhost:4000/menu')
-    .then(data => data.json())
-    .then(res => console.log(res));
+    .then(data => data.json());
+
+    //slider
+
+    const leftArrow = document.querySelector(".offer__slider-prev"),
+          rightArrow = document.querySelector(".offer__slider-next"),
+          slides = document.querySelectorAll(".offer__slide"),
+          currentSlide = document.querySelector("#current"),
+          totalSlide = document.querySelector("#total"),
+          slidesWrapper = document.querySelector(".offer__slider-wrapper"),
+          slidesField = document.querySelector(".offer__slider-inner"),
+          width = window.getComputedStyle(slidesWrapper).width;
+
+    let slideIndex = 1;
+    let offset = 0;
+
+    if (slides.length < 10) {
+        totalSlide.textContent = `0${slides.length}`;
+        currentSlide.textContent = `0${slideIndex}`;
+    } else {
+        total.textContent = slides.length;
+        totalSlide.textContent = slideIndex;
+    }
+
+    slidesField.style.width = 100 * slides.length + '%';
+    slidesField.style.display = 'flex';
+    slidesField.style.transition = '0.5s all';
+
+    slidesWrapper.style.overflow = 'hidden';
+
+    slides.forEach(slide => {
+        slide.style.width = width;
+    });
+
+    rightArrow.addEventListener('click', () => {
+        if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+			offset = 0;
+		} else {
+			offset += +width.slice(0, width.length - 2);
+		}
+
+		slidesField.style.transform = `translateX(-${offset}px)`;
+
+         if (slideIndex == slides.length) {
+            slideIndex = 1;
+         } else {
+            slideIndex++;
+         }
+
+         if (slides.length < 10) {
+            currentSlide.textContent = `0${slideIndex}`;
+         } else {
+            currentSlide.textContent = slideIndex;
+         }
+    });
+
+    leftArrow.addEventListener('click', () => {
+        if (offset == 0) {
+			offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+		} else {
+			offset -= +width.slice(0, width.length - 2);
+		}
+
+		slidesField.style.transform = `translateX(-${offset}px)`;
+
+        if (slideIndex == 1) {
+            slideIndex = slides.length;
+         } else {
+            slideIndex--;
+         }
+
+         if (slides.length < 10) {
+            currentSlide.textContent = `0${slideIndex}`;
+         } else {
+            currentSlide.textContent = slideIndex;
+         }
+    });
+
+    // let slideIndex = 0;
+
+    // totalSlide.innerHTML = slides.length < 10 ? `0${slides.length}` : slides.length;
+
+    // function showSlide(n) {
+    //     slides.forEach(slide => slide.classList.add('hide'));
+    //     slides[n].classList.remove('hide');
+    //     currentSlide.innerHTML = (n + 1) < 10 ? `0${n + 1}` : n + 1;
+    // };
+
+    // showSlide(slideIndex);
+
+    // rightArrow.addEventListener('click', () => {
+    //     slideIndex++;
+    //     if (slideIndex >= slides.length) slideIndex = 0;
+    //     showSlide(slideIndex);
+    // })
+
+    // leftArrow.addEventListener('click', () => {
+    //     slideIndex--;
+    //     if (slideIndex < 0) slideIndex = slides.length - 1;
+    //     showSlide(slideIndex);
+    // })
+
+    
 });
