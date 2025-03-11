@@ -9,7 +9,7 @@ import { openModal } from './modules/modal';
 
 window.addEventListener('DOMContentLoaded', () => {    
     
-    const modalTimerId = setTimeout(() => openModal('.modal', modalTimerId), 5000);
+    const modalTimerId = setTimeout(() => openModal('.modal', modalTimerId), 50000);
 
     calc();
     cards();
