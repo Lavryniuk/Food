@@ -1,14 +1,15 @@
-function slider() {
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
 
      // Slider
 
-    const leftArrow = document.querySelector(".offer__slider-prev"),
-          rightArrow = document.querySelector(".offer__slider-next"),
-          slides = document.querySelectorAll(".offer__slide"),
-          currentSlide = document.querySelector("#current"),
-          totalSlide = document.querySelector("#total"),
-          slidesWrapper = document.querySelector(".offer__slider-wrapper"),
-          slidesField = document.querySelector(".offer__slider-inner"),
+    const leftArrow = document.querySelector(prevArrow),
+          rightArrow = document.querySelector(nextArrow),
+          slides = document.querySelectorAll(slide),
+          currentSlide = document.querySelector(currentCounter),
+          totalSlide = document.querySelector(totalCounter),
+          slidesWrapper = document.querySelector(wrapper),
+          slidesField = document.querySelector(field),
+          slider = document.querySelector(container),
           width = window.getComputedStyle(slidesWrapper).width;
 
     let slideIndex = 1;
@@ -80,8 +81,7 @@ function slider() {
 
     // Slider(indicators)
 
-    const slider = document.querySelector('.offer__slider'),
-          indicators = document.createElement('div');
+    const indicators = document.createElement('div');
 
     indicators.classList.add('carousel-indicators');
 
@@ -118,4 +118,4 @@ function slider() {
     });
 }
 
-module.exports = slider;
+export default slider;
