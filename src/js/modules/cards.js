@@ -43,7 +43,7 @@ function cards() {
         }
     }
 
-    getResourses('http://localhost:4000/menu')
+    getResourses('https://mock-backend-xq5i.onrender.com/menu')
         .then(data => {
             data.forEach(({img, altimg, title, descr, price}) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();

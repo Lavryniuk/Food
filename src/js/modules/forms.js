@@ -32,7 +32,7 @@ function forms(formSelector, modalTimerId) {
 
             const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-            postData('http://localhost:4000/requests', json)
+            postData('https://mock-backend-xq5i.onrender.com/requests', json)
             .then(data => {
                 console.log(data);
                 showThanksModal(message.success);
