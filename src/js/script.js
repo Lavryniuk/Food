@@ -6,10 +6,11 @@ import slider from './modules/slider';
 import tabs from './modules/tabs';
 import timer from './modules/timer';
 import { openModal } from './modules/modal';
+import '../scss/style.scss';
 
 window.addEventListener('DOMContentLoaded', () => {    
     
-    const modalTimerId = setTimeout(() => openModal('.modal', modalTimerId), 50000);
+    const modalTimerId = setTimeout(() => openModal('.modal', modalTimerId), 3000);
 
     calc();
     cards();
